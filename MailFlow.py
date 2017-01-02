@@ -245,31 +245,31 @@ class MCMimePart(Category('MCMimePart')):
         return result.replace(u'<BR> ', u'<BR>&nbsp;')
 
 
-class MessageViewController(Category('MessageViewController')):
-    @swizzle('MessageViewController', 'forward:')
-    def forward_(self, old, *args):
-        event = NSApplication.sharedApplication().currentEvent()
-        if event and event.modifierFlags() & NSAlternateKeyMask:
-            return old(self, *args)
-        return self._messageViewer().forwardAsAttachment_(*args)
-
-
-class MessageViewer(Category('MessageViewer')):
-    @swizzle('MessageViewer', 'forwardMessage:')
-    def forwardMessage_(self, old, *args):
-        event = NSApplication.sharedApplication().currentEvent()
-        if event and event.modifierFlags() & NSAlternateKeyMask:
-            return old(self, *args)
-        return self.forwardAsAttachment_(*args)
-
-
-class SingleMessageViewer(Category('SingleMessageViewer')):
-    @swizzle('SingleMessageViewer', 'forwardMessage:')
-    def forwardMessage_(self, old, *args):
-        event = NSApplication.sharedApplication().currentEvent()
-        if event and event.modifierFlags() & NSAlternateKeyMask:
-            return old(self, *args)
-        return self.forwardAsAttachment_(*args)
+#class MessageViewController(Category('MessageViewController')):
+#    @swizzle('MessageViewController', 'forward:')
+#    def forward_(self, old, *args):
+#        event = NSApplication.sharedApplication().currentEvent()
+#        if event and event.modifierFlags() & NSAlternateKeyMask:
+#            return old(self, *args)
+#        return self._messageViewer().forwardAsAttachment_(*args)
+#
+#
+#class MessageViewer(Category('MessageViewer')):
+#    @swizzle('MessageViewer', 'forwardMessage:')
+#    def forwardMessage_(self, old, *args):
+#        event = NSApplication.sharedApplication().currentEvent()
+#        if event and event.modifierFlags() & NSAlternateKeyMask:
+#            return old(self, *args)
+#        return self.forwardAsAttachment_(*args)
+#
+#
+#class SingleMessageViewer(Category('SingleMessageViewer')):
+#    @swizzle('SingleMessageViewer', 'forwardMessage:')
+#    def forwardMessage_(self, old, *args):
+#        event = NSApplication.sharedApplication().currentEvent()
+#        if event and event.modifierFlags() & NSAlternateKeyMask:
+#            return old(self, *args)
+#        return self.forwardAsAttachment_(*args)
 
 
 class MailFlow(Class('MVMailBundle')):
